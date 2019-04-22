@@ -24,7 +24,7 @@ public class Game {
 			System.out.println(this.player[player].getColor() + " の番です");
 			do {
 				System.out.println("縦軸を 1 - 8, 横軸を a - h で入力してください");
-				flag = this.player[player].put(bgui, scan.nextInt(), scan.next(), this.board);
+				flag = this.player[player].put(this.bgui, scan.nextInt(), scan.next(), this.board);
 			} while(!flag);
 			player = player == 1 ? 0 : 1;
 			if (this.board.getTotalStone() == this.board.MAXNUM) break;
@@ -38,15 +38,20 @@ public class Game {
 		int p1Num = this.board.countStone(this.player[0].getId());
 		int p2Num = this.board.countStone(this.player[1].getId());
 
-		System.out.println(player[0].getColor() + " : " + p1Num);
-		System.out.println(player[1].getColor() + " : " + p2Num);
+		String player1 = player[0].getColor() + " : " + p1Num;
+		String player2 = player[1].getColor() + " : " + p2Num;
+		System.out.println(player1);
+		System.out.println(player2);
 
 
 		if (p1Num > p2Num) {
+			new ResultDialog(this.bgui, player1 + "\n" + player2 + "\n" + player[0].getColor() + " の勝利です");
 			System.out.println(player[0].getColor() + " の勝利です");
 		} else if (p1Num < p2Num) {
+			new ResultDialog(this.bgui, player1 + "\n" + player2 + "\n" + player[1].getColor() + " の勝利です");
 			System.out.println(player[1].getColor() + " の勝利です");
 		} else {
+			new ResultDialog(this.bgui, player1 + "\n" + player2 + "\n" + "引き分けです");
 			System.out.println("引き分けです");
 		}
 	}
