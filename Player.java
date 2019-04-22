@@ -2,30 +2,28 @@
 public class Player {
 	private int id; // 1: player1, -1: player2
 	private String color; // 1: 白 -1: 黒
-	private int count; // 自分の石の数
 
 	public Player() {}
 	public Player(int id) {
 		this.id = id;
 		this.color = id == 1? "白" : "黒";
-		this.count = 0;
 	}
 
-	public int getCount() {
-		return this.count;
+	public int getId() {
+		return this.id;
 	}
 
 	public String getColor() {
 		return this.color;
 	}
 
-	public boolean put(int x, String sy, Board b) {
+	public boolean put(BoardGUI bgui, int x, String sy, Board b) {
 		int y = convertX(sy);
 		if (y == -1 || x < 1 || x > 8) {
 			System.out.println("想定外の入力が入っています");
 			return false;
 		}
-		if (!b.setStone(x - 1, y - 1, this.id)) {
+		if (!b.setStone(bgui, x - 1, y - 1, this.id)) {
 			return false;
 		}
 		return true;
